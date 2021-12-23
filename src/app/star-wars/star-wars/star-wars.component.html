@@ -1,24 +1,26 @@
-<p>star-wars works!</p>
+<p>Star Wars rules!</p>
 
+<mat-table [dataSource]="people?.results" class="mat-elevation-z8">
 
-<table mat-table [dataSource]="people.results" class="mat-elevation-z8">
-  
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="birth_year">
-      <th mat-header-cell *matHeaderCellDef> Birth Year </th>
-      <td mat-cell *matCellDef="let element"> {{element.birth_year}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="hair_color">
-      <th mat-header-cell *matHeaderCellDef> Hair Color </th>
-      <td mat-cell *matCellDef="let element"> {{element.hair_color}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="birth_year">
+    <mat-header-cell *matHeaderCellDef> Birth Year</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.birth_year}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="hair_color">
+    <mat-header-cell *matHeaderCellDef> Hair Color</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.hair_color}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [length]="people.count"
+               [pageSize]="10"
+               [pageIndex]="page - 1"
+(page)="handlePageChange($event)"></mat-paginator>

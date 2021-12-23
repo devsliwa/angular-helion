@@ -12,19 +12,24 @@ export class StarWarsComponent implements OnInit {
   displayedColumns =  ['name', 'birth_year', 'hair_color'];
   page: number = 1;
 
-  constructor(public api: SwHttpApiService) { 
+  constructor(public api: SwHttpApiService) {
 
   }
 
   ngOnInit(): void {
-    this.getData();
+    this.getData(this.page, 'people');
   }
 
-  getData() {
-    this.api.getSwApiData(this.page, 'people').subscribe(response => {
+  getData(page: number, item: string) {
+    this.api.getSwApiData(page,item).subscribe(response => {
       console.log(response);
       this.people = response;
     })
+  }
+
+  handlePageChange($event: any) {
+    console.log($event.pageIndex);
+    this.getData($event.pageIndex + 1, 'people');
   }
 
 }
